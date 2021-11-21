@@ -2,7 +2,6 @@ package repositories
 
 import (
 	"errors"
-	"fmt"
 	"hexagonal-example/internal/core/domain/bank"
 )
 
@@ -20,7 +19,6 @@ func NewMemoryDb() *memoryDb {
 func (memDb *memoryDb) Get(accountId int) (*bank.Account, error) {
 
 	account := memDb.instance[accountId]
-	fmt.Println(account)
 
 	if account == nil {
 		return nil, errors.New("account doesnt exist")

@@ -11,7 +11,6 @@ import (
 func main() {
 	dbRepository := repositories.NewMemoryDb()
 
-	// todo: should Account.New() create it?
 	acc := bank.Account{
 		Id: 1,
 		Money: 100,

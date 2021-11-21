@@ -1,6 +1,6 @@
 package bank
 
-// internal/core/domain/bank
+import "errors"
 
 type Account struct {
 	Id    int
@@ -12,6 +12,10 @@ func (acc Account) Balance() (balance float64) {
 }
 
 func (acc *Account) Withdraw(amount float64) error {
+	if (acc.Money - amount) < 0 {
+		return errors.New("no enough funds")
+	}
+
 	acc.Money = acc.Balance() - amount
 
 	return nil
