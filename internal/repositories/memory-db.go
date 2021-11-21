@@ -11,12 +11,9 @@ type memoryDb struct {
 }
 
 func NewMemoryDb() *memoryDb {
-	// todo: make?
-	//return &memoryDb{instance: map[int]bank.Account{}}
-
-	y := make(map[int]*bank.Account)
+	memDb := make(map[int]*bank.Account)
 	return &memoryDb{
-		instance: y,
+		instance: memDb,
 	}
 }
 

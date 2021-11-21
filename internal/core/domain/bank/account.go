@@ -7,14 +7,7 @@ type Account struct {
 	Money float64
 }
 
-//func NewAccount(id int, initialMoney float64) *Account {
-//	return &Account{
-//		Id:    id,
-//		Money: initialMoney,
-//	}
-//}
-
-func (acc *Account) Balance() (balance float64) {
+func (acc Account) Balance() (balance float64) {
 	return acc.Money
 }
 

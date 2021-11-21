@@ -15,7 +15,7 @@ func New(databaseRepository ports.DatabaseRepository) *service {
 	}
 }
 
-func (srv *service) WithdrawFromAccount(id int, amount float64) error {
+func (srv service) WithdrawFromAccount(id int, amount float64) error {
 	account, err := srv.databaseRepository.Get(id)
 	if err != nil {
 		return err
@@ -29,7 +29,7 @@ func (srv *service) WithdrawFromAccount(id int, amount float64) error {
 	return nil
 }
 
-func (srv *service) Balance(id int) (float64, error) {
+func (srv service) Balance(id int) (float64, error) {
 	account, err := srv.databaseRepository.Get(id)
 	if err != nil {
 		log.Println(err)
