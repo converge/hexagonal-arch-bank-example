@@ -1,6 +1,8 @@
-package service
+package services
 
 import (
+	"fmt"
+	"hexagonal-example/internal/core/domain/bank"
 	"hexagonal-example/internal/core/ports"
 	"log"
 )
@@ -36,4 +38,12 @@ func (srv service) Balance(id int) (float64, error) {
 		return 0, err
 	}
 	return account.Balance(), nil
+}
+
+func (srv service) Create(id int, money float64) bank.Account {
+	fmt.Println("hiii")
+	return bank.Account{
+		Id: 1,
+		Money: 100,
+	}
 }

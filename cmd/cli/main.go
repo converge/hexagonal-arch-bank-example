@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"hexagonal-example/internal/core/domain/bank"
-	"hexagonal-example/internal/core/service"
+	"hexagonal-example/internal/core/services"
 	"hexagonal-example/internal/repositories"
 	"log"
 )
@@ -22,7 +22,7 @@ func main() {
 		return
 	}
 
-	srv := service.New(dbRepository)
+	srv := services.New(dbRepository)
 	err = srv.WithdrawFromAccount(1, 50)
 	if err != nil {
 		log.Println(err)

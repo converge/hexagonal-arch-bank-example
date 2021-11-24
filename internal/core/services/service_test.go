@@ -1,4 +1,4 @@
-package service
+package services
 
 import (
 	"hexagonal-example/internal/core/domain/bank"
@@ -14,7 +14,7 @@ func TestNew(t *testing.T) {
 	srvInstance := &service{}
 
 	if reflect.TypeOf(srv) != reflect.TypeOf(srvInstance) {
-		t.Errorf("wanted: instance of *service, got: instance of %v", reflect.TypeOf(srvInstance))
+		t.Errorf("wanted: instance of *services, got: instance of %v", reflect.TypeOf(srvInstance))
 	}
 }
 
