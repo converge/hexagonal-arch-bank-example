@@ -2,21 +2,22 @@ package repositories
 
 import (
 	"errors"
+	"github.com/google/uuid"
 	"hexagonal-example/internal/core/domain/bank"
 )
 
 type memoryDb struct {
-	instance map[int]*bank.Account
+	instance map[uuid.UUID]*bank.Account
 }
 
 func NewMemoryDb() *memoryDb {
-	memDb := make(map[int]*bank.Account)
+	memDb := make(map[uuid.UUID]*bank.Account)
 	return &memoryDb{
 		instance: memDb,
 	}
 }
 
-func (memDb *memoryDb) Get(accountId int) (*bank.Account, error) {
+func (memDb *memoryDb) Get(accountId uuid.UUID) (*bank.Account, error) {
 
 	account := memDb.instance[accountId]
 

@@ -1,7 +1,7 @@
 package services
 
 import (
-	"fmt"
+	"github.com/google/uuid"
 	"hexagonal-example/internal/core/domain/bank"
 	"hexagonal-example/internal/core/ports"
 	"log"
@@ -17,7 +17,7 @@ func New(databaseRepository ports.DatabaseRepository) *service {
 	}
 }
 
-func (srv service) WithdrawFromAccount(id int, amount float64) error {
+func (srv service) WithdrawFromAccount(id uuid.UUID, amount float64) error {
 	account, err := srv.databaseRepository.Get(id)
 	if err != nil {
 		return err
@@ -31,7 +31,7 @@ func (srv service) WithdrawFromAccount(id int, amount float64) error {
 	return nil
 }
 
-func (srv service) Balance(id int) (float64, error) {
+func (srv service) Balance(id uuid.UUID) (float64, error) {
 	account, err := srv.databaseRepository.Get(id)
 	if err != nil {
 		log.Println(err)
@@ -40,10 +40,12 @@ func (srv service) Balance(id int) (float64, error) {
 	return account.Balance(), nil
 }
 
-func (srv service) Create(id int, money float64) bank.Account {
-	fmt.Println("hiii")
-	return bank.Account{
-		Id: 1,
-		Money: 100,
+func (srv service) Create(account bank.Account) (uuid.UUID, error) {
+	account.Id = uuid.New()
+	err := srv.databaseRepository.Save(&account)
+	if err != nil {
+		log.Println(err)
+		return uuid.Nil, err
 	}
+	return account.Id, nil
 }

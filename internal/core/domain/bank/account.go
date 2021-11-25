@@ -1,9 +1,12 @@
 package bank
 
-import "errors"
+import (
+	"errors"
+	"github.com/google/uuid"
+)
 
 type Account struct {
-	Id    int
+	Id    uuid.UUID
 	Money float64
 }
 

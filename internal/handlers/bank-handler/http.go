@@ -1,8 +1,13 @@
 package bank_handler
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/google/uuid"
+	"github.com/gorilla/mux"
+	"hexagonal-example/internal/core/domain/bank"
 	"hexagonal-example/internal/core/ports"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -16,24 +21,61 @@ func NewHTTPHandler (bankService ports.BankServiceInterface) *HTTPHandler {
 		bankService: bankService,
 	}
 }
+
 func (h *HTTPHandler) SendSMS(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("smsSent")
-	//err := h.bankService.SendSMS("ok")
-	//if err != nil {
-	//	log.Println(err)
-	//}
 	w.Write([]byte("ok"))
 }
 
 func (h *HTTPHandler) Balance(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("hi"))
+
+	w.Header().Set("Content-Type", "application/json")
+
+	pathVars := mux.Vars(r)
+	id := pathVars["id"]
+	accUuid := uuid.MustParse(id)
+	balance, err := h.bankService.Balance(accUuid)
+	if err != nil {
+		log.Println(err)
+	}
+
+	jsonData := map[string]interface{}{
+		"id": accUuid,
+		"balance": balance,
+	}
+
+	err = json.NewEncoder(w).Encode(jsonData)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func (h *HTTPHandler) Create(w http.ResponseWriter, r *http.Request) {
-	val, err := h.bankService.Balance(1)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		log.Println()
+		log.Println(err)
 	}
-	fmt.Println(val)
-	w.Write([]byte("create"))
+
+	var acc bank.Account
+	err = json.Unmarshal(body, &acc)
+	if err != nil {
+		log.Println(err)
+	}
+
+	newId, err := h.bankService.Create(acc)
+	if err != nil {
+		log.Println(err)
+	}
+
+	ret := map[string]string{
+		"id": newId.String(),
+	}
+
+	err = json.NewEncoder(w).Encode(ret)
+	if err != nil {
+		log.Println(err)
+	}
 }
