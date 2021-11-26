@@ -11,7 +11,7 @@ func TestNew(t *testing.T) {
 	memDb := repositories.NewMemoryDb()
 	srv := New(memDb)
 
-	srvInstance := &service{}
+	srvInstance := &bankService{}
 
 	if reflect.TypeOf(srv) != reflect.TypeOf(srvInstance) {
 		t.Errorf("wanted: instance of *services, got: instance of %v", reflect.TypeOf(srvInstance))

@@ -1,4 +1,4 @@
-package bank_handler
+package handlers
 
 import (
 	"encoding/json"
@@ -12,22 +12,22 @@ import (
 	"net/http"
 )
 
-type HTTPHandler struct {
+type HTTPBankHandler struct {
 	bankService ports.BankServiceInterface
 }
 
-func NewHTTPHandler (bankService ports.BankServiceInterface) *HTTPHandler {
-	return &HTTPHandler{
+func NewHTTPHandler (bankService ports.BankServiceInterface) *HTTPBankHandler {
+	return &HTTPBankHandler{
 		bankService: bankService,
 	}
 }
 
-func (h *HTTPHandler) SendSMS(w http.ResponseWriter, r *http.Request) {
+func (h *HTTPBankHandler) SendSMS(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("smsSent")
 	w.Write([]byte("ok"))
 }
 
-func (h *HTTPHandler) Balance(w http.ResponseWriter, r *http.Request) {
+func (h *HTTPBankHandler) Balance(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
@@ -50,7 +50,7 @@ func (h *HTTPHandler) Balance(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *HTTPHandler) Create(w http.ResponseWriter, r *http.Request) {
+func (h *HTTPBankHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 

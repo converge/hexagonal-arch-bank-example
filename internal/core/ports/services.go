@@ -9,3 +9,7 @@ type BankServiceInterface interface {
 	Balance(id uuid.UUID) (float64, error)
 	Create(bank.Account) (uuid.UUID, error)
 }
+
+type HealthInterface interface {
+	IsAppHealthy() bool
+}
