@@ -7,21 +7,32 @@ Go Lang é a linguagem utilizada.
 ## Estrutura
 
 ```
-.
 ├── cmd
-│   └── cli
+│   ├── cli
+│   │   └── main.go
+│   └── httpserver
 │       └── main.go
 ├── go.mod
+├── go.sum
 ├── internal
 │   ├── core
 │   │   ├── domain
-│   │   │   └── bank
-│   │   │       └── account.go
+│   │   │   ├── bank
+│   │   │   │   ├── account.go
+│   │   │   │   └── account_test.go
+│   │   │   └── health
+│   │   │       └── health.go
 │   │   ├── ports
-│   │   │   └── databaseRepository.go
-│   │   └── service
-│   │       └── service.go
+│   │   │   ├── databaseRepository.go
+│   │   │   └── services.go
+│   │   └── services
+│   │       ├── bank-service.go
+│   │       ├── bank-service_test.go
+│   │       └── health-service.go
+│   ├── handlers
+│   │   ├── bank-handler.go
+│   │   └── health-handler.go
 │   └── repositories
-│       └── memory-db.go
-└── README.md
+│       ├── memory-db.go
+│       └── memory-db_test.go
 ```
