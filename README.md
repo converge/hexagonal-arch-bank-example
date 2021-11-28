@@ -2,7 +2,7 @@ info: essa implementação ficou um pouco supeficial, e reflete muito o que est�
 
 Uma implementação mais fluida, sem se preocupar tanto em seguir as regras, mas seguir a ideia da arquitetura foi aplicada nesse [fork](https://github.com/Jacquin-Home/hexagonal-arch-bank-example).
 
---
+---
 
 # Hexagonal architecture bank account example
 
