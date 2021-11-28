@@ -1,3 +1,9 @@
+info: essa implementação ficou um pouco supeficial, e reflete muito o que está escrito nos livros. 
+
+Uma implementação mais fluida, sem se preocupar tanto em seguir as regras, mas seguir a ideia da arquitetura foi aplicada nesse [fork](https://github.com/Jacquin-Home/hexagonal-arch-bank-example).
+
+--
+
 # Hexagonal architecture bank account example
 
 Esse repositório contém um pouco dos meus estudos sobre arquitetura hexagonal.
